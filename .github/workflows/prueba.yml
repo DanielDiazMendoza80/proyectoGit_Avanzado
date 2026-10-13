@@ -1,22 +1,16 @@
-name: Prueba de tokens
-
+name: Prueba runner y secret
 on: [push]
-
 jobs:
   probar:
     runs-on: self-hosted
     steps:
-      - name: Comparar variable con secreto local
+      - name: Comparar secret con variable local
         env:
-          DEV_TOKEN: ${{ secrets.DEV_TOKEN }}
-          LOCAL_DEV_TOKEN: ${{ vars.LOCAL_DEV_TOKEN }}
-        shell: pwsh
+          TOKEN: ${{ secrets.DEV_TOKEN }}
         run: |
-          if ($env:DEV_TOKEN -and
-              $env:LOCAL_DEV_TOKEN -and
-              $env:DEV_TOKEN -ceq $env:LOCAL_DEV_TOKEN) {
+          if ($env:DEV_TOKEN -ea $env:LOCAL_DEV_TOKEN)  {
             Write-Host "CORRECTO: los tokens coinciden."
           } else {
-            Write-Host "ERROR: los tokens no coinciden o falta una variable."
+            Write-Host "ERROR: los tokens no coinciden."
             exit 1
           }
