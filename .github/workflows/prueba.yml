@@ -1,4 +1,5 @@
 name: Prueba runner y secret
+shell: bash
 on: [push]
 jobs:
   probar:
