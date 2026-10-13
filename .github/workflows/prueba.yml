@@ -1,12 +1,8 @@
 name: Prueba runner y secret
-shell: bash
 on: [push]
 jobs:
   probar:
     runs-on: self-hosted
-    defaults:
-      run:
-        shell: bash
     steps:
       - name: Comparar secret con variable local
         env:
